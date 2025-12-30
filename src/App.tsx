@@ -7,7 +7,7 @@ export default function App() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState("");
 
-  const API_KEY = "4e4a8b1ad0f050bce9ca8ecfae6c5cb8";
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   const fetchWeather = async () => {
     if (!city.trim()) {
