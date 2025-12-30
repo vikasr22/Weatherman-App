@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ----------------------------
+   Floating blobs (Apple Music style)
+----------------------------- */
+.music-layer {
+  position: fixed;
+  width: 80vmax;
+  height: 80vmax;
+  border-radius: 50%;
+  opacity: 0.75;
+  filter: blur(140px);
+  z-index: -1;
+  animation: float 80s ease-in-out infinite alternate,
+    paletteShift 60s ease-in-out infinite;
+}
+
+.layer1 {
+  top: -30%;
+  left: -15%;
+  animation-duration: 55s, 60s;
+}
+.layer2 {
+  top: 20%;
+  right: -20%;
+  animation-duration: 60s, 60s;
+}
+.layer3 {
+  bottom: -20%;
+  left: 20%;
+  animation-duration: 65s, 60s;
+}
+
+@keyframes float {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate(200px, -200px) rotate(360deg);
+  }
+}
+
+@keyframes paletteShift {
+  0% {
+    background: radial-gradient(circle at 30% 30%, #ff7a18, #b13224, #020024);
+  }
+  33% {
+    background: radial-gradient(circle at 70% 40%, #f5e6c8, #4a78a3, #050012);
+  }
+  66% {
+    background: radial-gradient(circle at 40% 60%, #dff3c4, #5aa9a2, #1f3d3b);
+  }
+  100% {
+    background: radial-gradient(circle at 30% 30%, #ff7a18, #b13224, #020024);
+  }
+}
+
+/* Film grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+/* ============================
+   APP UI
+============================= */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 44px;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+
+/* Search */
+.search-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.input {
+  padding: 14px 22px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  color: #fff;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.music-button {
+  padding: 14px 26px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.music-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+}
+.music-button:active {
+  transform: scale(0.95);
+}
+
+.error {
+  color: #ff5555;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* Weather Card */
+.weather-card {
+  margin-top: 20px;
+  padding: 32px 36px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px);
+  text-align: center;
+  width: 340px;
+  animation: fadeUp 0.6s ease forwards;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weather-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-card h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.weather-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.temperature {
+  font-size: 42px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.description {
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.weather-stats {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
